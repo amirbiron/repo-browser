@@ -74,8 +74,44 @@ def create_indexes():
     db.repo_files.create_index([("repo_name", ASCENDING), ("language", ASCENDING)])
     db.repo_files.create_index([("repo_name", ASCENDING)])
     
-    # Text index for filename search
-    db.repo_files.create_index([("path", TEXT)])
+    # Text index for filename search (avoid clashing with "language" field)
+    desired_text_index = {
+        "name": "path_text",
+        "default_language": "none",
+        "language_override": "text_language",
+    }
+    existing_text_index = None
+    index_info = db.repo_files.index_information()
+    for name, info in index_info.items():
+        if any(key[1] == "text" for key in info.get("key", [])):
+            existing_text_index = (name, info)
+            break
+    
+    if existing_text_index:
+        name, info = existing_text_index
+        current_override = info.get("language_override", "language")
+        current_default = info.get("default_language", "english")
+        if (
+            current_override != desired_text_index["language_override"]
+            or current_default != desired_text_index["default_language"]
+        ):
+            logger.info(
+                "Dropping text index '%s' (override=%s, default=%s) to avoid "
+                "conflicts with repo file language values.",
+                name,
+                current_override,
+                current_default,
+            )
+            db.repo_files.drop_index(name)
+            existing_text_index = None
+    
+    if not existing_text_index:
+        db.repo_files.create_index(
+            [("path", TEXT)],
+            name=desired_text_index["name"],
+            default_language=desired_text_index["default_language"],
+            language_override=desired_text_index["language_override"],
+        )
     
     logger.info("Database indexes created")
 
