@@ -20,4 +20,4 @@ services:
     disk:
       name: repo-storage
       mountPath: /opt/render/project/src/repos
-      sizeGB: 10
+      sizeGB: 1
