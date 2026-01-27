@@ -1,0 +1,60 @@
+{% extends "repo/base_repo.html" %}
+
+{% block tree_content %}
+<div class="tree-header">
+    <h3>קבצים</h3>
+    <button id="collapse-all-btn" class="btn-icon" title="קפל הכל">
+        <i class="bi bi-arrows-collapse"></i>
+    </button>
+</div>
+<div id="file-tree" class="file-tree">
+    <p>טוען...</p>
+</div>
+{% endblock %}
+
+{% block code_content %}
+<div class="code-header">
+    <div class="file-path" id="file-path-display">
+        <i class="bi bi-file-code"></i>
+        <span>בחר קובץ</span>
+    </div>
+    <div class="code-actions">
+        <button id="history-btn" class="btn-icon" title="היסטוריה" style="display:none;">
+            <i class="bi bi-clock-history"></i>
+        </button>
+        <button id="copy-btn" class="btn-icon" title="העתק">
+            <i class="bi bi-clipboard"></i>
+        </button>
+    </div>
+</div>
+
+<div id="code-viewer-container" class="code-viewer-container">
+    <div class="welcome-message">
+        <i class="bi bi-github" style="font-size: 4rem; color: #666;"></i>
+        <h2>ברוכים הבאים לדפדפן הקוד</h2>
+        <p>בחר ריפו מהרשימה, או הוסף ריפו חדש</p>
+        <button class="btn btn-primary btn-large" onclick="openRepoSelector()">
+            <i class="bi bi-plus-circle"></i> הוסף ריפו
+        </button>
+        <div style="margin-top: 2rem;">
+            <div class="search-box" style="max-width: 400px; margin: 0 auto;">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="חפש (Ctrl+K)" readonly style="cursor: pointer;" onclick="document.getElementById('global-search').focus()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- History Panel (hidden by default) -->
+<div id="history-panel" class="history-panel hidden">
+    <div class="history-header">
+        <h3>היסטוריית קובץ</h3>
+        <button id="close-history-btn" class="btn-icon">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    <div id="history-content" class="history-content">
+        <p>טוען...</p>
+    </div>
+</div>
+{% endblock %}
