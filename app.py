@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory
+import atexit
 import logging
 import os
 
@@ -44,10 +45,8 @@ def create_app():
         """Health check endpoint for Render"""
         return {"status": "healthy"}
     
-    # Cleanup on shutdown
-    @app.teardown_appcontext
-    def shutdown_session(exception=None):
-        close_db()
+    # Cleanup when the process exits
+    atexit.register(close_db)
     
     logger.info("Application created successfully")
     return app

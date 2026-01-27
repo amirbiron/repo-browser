@@ -82,7 +82,9 @@ def create_indexes():
 
 def close_db():
     """סגירת חיבור DB"""
-    global _client
+    global _client, _db
     if _client:
         _client.close()
+        _client = None
+        _db = None
         logger.info("MongoDB connection closed")
