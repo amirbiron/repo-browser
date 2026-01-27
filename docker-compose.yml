@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/multi_repo_browser
+      - REPO_MIRROR_PATH=/var/data/repos
+      - FLASK_SECRET_KEY=dev-secret-key-change-in-production
+      - FLASK_ENV=development
+    volumes:
+      - repos_data:/var/data/repos
+      - ./:/app
+    depends_on:
+      - mongo
+    command: flask run --host=0.0.0.0 --debug
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  repos_data:
+  mongo_data:
