@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Repo Browser</title>
+    
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/repo-browser.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔍 Multi-Repo Browser</h1>
+            <div class="header-actions">
+                <button id="add-repo-btn" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> הוסף ריפו
+                </button>
+                <button id="sync-all-btn" class="btn btn-secondary">
+                    <i class="bi bi-arrow-repeat"></i> סנכרן הכל
+                </button>
+            </div>
+        </header>
+        
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input 
+                    type="text" 
+                    id="global-search" 
+                    placeholder="חפש בקוד... (Ctrl+K)"
+                    autocomplete="off"
+                >
+            </div>
+            <div id="search-results-dropdown" class="search-dropdown hidden">
+                <div class="search-results-list"></div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- File Tree -->
+            <aside class="tree-panel">
+                {% block tree_content %}{% endblock %}
+            </aside>
+            
+            <!-- Code Viewer -->
+            <main class="code-panel">
+                {% block code_content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    
+    <!-- Repo Selector Modal -->
+    <div id="repo-selector-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ניהול ריפוים</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Add Repo Form -->
+                <div class="add-repo-form">
+                    <h3>הוסף ריפו חדש</h3>
+                    <input 
+                        type="text" 
+                        id="new-repo-url" 
+                        placeholder="https://github.com/owner/repo"
+                        class="input-field"
+                    >
+                    <input 
+                        type="text" 
+                        id="new-repo-name" 
+                        placeholder="שם (אופציונלי)"
+                        class="input-field"
+                    >
+                    <button id="add-repo-submit" class="btn btn-primary">הוסף</button>
+                </div>
+                
+                <hr>
+                
+                <!-- Repo List -->
+                <div id="repo-list" class="repo-list">
+                    <p>טוען...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/yaml/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/shell/shell.min.js"></script>
+    
+    <script src="{{ url_for('static', filename='js/repo-browser.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
