@@ -44,6 +44,8 @@
 4. Environment Variables:
    ```
    MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/multi_repo_browser
+   # אם ה-URI לא כולל שם DB:
+   # MONGODB_DB_NAME=multi_repo_browser
    FLASK_SECRET_KEY=<generate-random-string>
    REPO_MIRROR_PATH=/opt/render/project/src/repos
    GITHUB_TOKEN=<optional-for-private-repos>
@@ -63,7 +65,7 @@
 2. צור New → Blueprint
 3. חבר את ה-repository
 4. Render יזהה את render.yaml אוטומטית
-5. הגדר את MONGODB_URI ב-Environment Variables
+5. הגדר את MONGODB_URI ב-Environment Variables (או MONGODB_DB_NAME אם אין DB ב-URI)
 
 #### 3. בדיקה
 
@@ -205,6 +207,8 @@ multi-repo-browser/
 **MongoDB connection failed**
 - בדוק את MONGODB_URI
 - וודא שה-IP מאושר ב-MongoDB Atlas
+**No default database name defined**
+- הוסף שם DB ל-MONGODB_URI או הגדר MONGODB_DB_NAME
 
 **Git clone timeout**
 - ריפוים גדולים לוקחים זמן

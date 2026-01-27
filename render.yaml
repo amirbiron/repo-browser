@@ -13,6 +13,8 @@ services:
         generateValue: true
       - key: MONGODB_URI
         sync: false  # Set this in Render dashboard
+      - key: MONGODB_DB_NAME
+        sync: false  # Optional - set if URI has no DB name
       - key: REPO_MIRROR_PATH
         value: /opt/render/project/src/repos
       - key: GITHUB_TOKEN

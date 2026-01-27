@@ -22,7 +22,7 @@ pip install -r requirements.txt || { echo "❌ Failed to install dependencies"; 
 if [ ! -f .env ]; then
     echo "📝 Creating .env file..."
     cp .env.example .env
-    echo "⚠️  Please edit .env and set your MongoDB URI"
+    echo "⚠️  Please edit .env and set your MongoDB URI (and MONGODB_DB_NAME if needed)"
 fi
 
 # Create repos directory
@@ -33,7 +33,7 @@ echo ""
 echo "✅ Setup complete!"
 echo ""
 echo "Next steps:"
-echo "1. Edit .env and set MONGODB_URI"
+echo "1. Edit .env and set MONGODB_URI (or MONGODB_DB_NAME if no DB in URI)"
 echo "2. Run: source venv/bin/activate"
 echo "3. Run: flask run --debug"
 echo ""

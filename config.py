@@ -12,6 +12,8 @@ class Config:
     
     # MongoDB
     MONGODB_URI = os.getenv('MONGODB_URI', 'mongodb://localhost:27017/multi_repo_browser')
+    MONGODB_DB_NAME = os.getenv('MONGODB_DB_NAME', '').strip()
+    MONGODB_DEFAULT_DB_NAME = 'multi_repo_browser'
     
     # Git Mirror
     REPO_MIRROR_PATH = os.getenv('REPO_MIRROR_PATH', '/var/data/repos')

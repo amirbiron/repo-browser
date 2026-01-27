@@ -28,6 +28,8 @@
 5. **Environment Variables** (חשוב!):
    ```
    MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/repos
+   # אם ה-URI בלי שם DB:
+   # MONGODB_DB_NAME=repos
    FLASK_SECRET_KEY=your-secret-key-here-change-this
    REPO_MIRROR_PATH=/opt/render/project/src/repos
    ```
@@ -83,7 +85,7 @@ http://localhost:5000
 
 # 2. ערוך .env
 nano .env
-# הגדר MONGODB_URI
+# הגדר MONGODB_URI (או MONGODB_DB_NAME אם אין DB ב-URI)
 
 # 3. הפעל
 source venv/bin/activate
