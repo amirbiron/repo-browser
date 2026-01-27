@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: multi-repo-browser
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false  # Set this in Render dashboard
+      - key: REPO_MIRROR_PATH
+        value: /opt/render/project/src/repos
+      - key: GITHUB_TOKEN
+        sync: false  # Optional - set in dashboard for private repos
+    disk:
+      name: repo-storage
+      mountPath: /opt/render/project/src/repos
+      sizeGB: 10
