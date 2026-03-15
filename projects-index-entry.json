@@ -1,0 +1,12 @@
+{
+  "name": "Multi-Repo Browser",
+  "repo": "https://github.com/amirbiron/repo-browser",
+  "tags": ["python", "flask", "mongodb", "git", "code-browser", "search", "docker", "codemirror"],
+  "highlights": [
+    "דפדפן קוד מרובה-ריפוזיטוריז עם חיפוש גלובלי ו-diff",
+    "חיפוש cross-repo מהיר באמצעות git grep עם סינון לפי שפה ותוכן",
+    "סינטקס הדגשה ל-100+ שפות תכנות באמצעות CodeMirror",
+    "ניהול Git bare mirrors לסנכרון יעיל ואחסון חסכוני",
+    "API RESTful מלא עם deployment מוכן ל-Docker ו-Render"
+  ]
+}
